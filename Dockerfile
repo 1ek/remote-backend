@@ -8,15 +8,14 @@ RUN npm install
 
 RUN mkdir config
 RUN touch config/token_file.cfg
-RUN wget https://nmap.org/dist/nmap-7.93.tar.bz2
-RUN bzip2 -cd nmap-7.93.tar.bz2 | tar xvf -
-RUN cd nmap-7.93
-RUN ./configure
-RUN make
-RUN make install
-RUN cd /app
+
+
+RUN apt-get update
+RUN apt-get install -y nmap
+
 
 ENV TOKEN_FILE_PATH=/app/config/token_file.cfg
+ENV POSTGRES_HOST=remote-db-new
 
 COPY . .
 
